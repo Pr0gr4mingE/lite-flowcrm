@@ -1,0 +1,8 @@
+export type CargoUsuario = 
+  | "ADMINISTRADOR"
+  | "DIRETOR"
+  | "GERENTE_DE_CONTAS"
+  | "VENDEDOR"
+  | "ANALISTA_DE_MARKETING"
+  | "ANALISTA_DE_DADOS"
+  | "SUPORTE";
