@@ -9,17 +9,22 @@ export function useCadastro() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // 1. Salva a referência do form ANTES do await
+    const form = e.currentTarget; 
+
     setCarregando(true);
     setMensagem(null);
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
     const resultado = await criarUsuarioAction(formData);
 
     setMensagem(resultado.mensagem);
     setCarregando(false);
 
     if (resultado.sucesso) {
-      e.currentTarget.reset(); // Limpa o formulário se deu certo
+      // 2. Usa a variável salva para dar o reset
+      form.reset(); 
       
       // Dá tempo do usuário ler o sucesso e joga ele pro Login
       setTimeout(() => {
