@@ -1,9 +1,11 @@
 import { useState, FormEvent } from "react";
 import { loginAction } from "@/actions/auth/login.action";
+import { useRouter } from "next/navigation";
 
 export function useLogin() {
   const [carregando, setCarregando] = useState(false);
   const [mensagem, setMensagem] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -15,12 +17,13 @@ export function useLogin() {
 
     if (!resultado.sucesso) {
       setMensagem(resultado.mensagem || "Credenciais inválidas.");
+      setCarregando(false);
     } else {
-      // Se deu certo, aqui no futuro vai o router.push('/dashboard')
-      setMensagem("Login realizado com sucesso!"); 
+      setMensagem("Login realizado com sucesso! Redirecionando..."); 
+      
+      // O Cookie já está salvo pela Server Action. Só mandar pra rota privada!
+      router.push("/dashboard"); 
     }
-    
-    setCarregando(false);
   };
 
   return { handleSubmit, carregando, mensagem };

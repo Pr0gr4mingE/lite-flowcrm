@@ -1,9 +1,11 @@
 import { useState, FormEvent } from "react";
 import { criarUsuarioAction } from "@/actions/auth/criar-usuario.action";
+import { useRouter } from "next/navigation";
 
 export function useCadastro() {
   const [carregando, setCarregando] = useState(false);
   const [mensagem, setMensagem] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,6 +20,11 @@ export function useCadastro() {
 
     if (resultado.sucesso) {
       e.currentTarget.reset(); // Limpa o formulário se deu certo
+      
+      // Dá tempo do usuário ler o sucesso e joga ele pro Login
+      setTimeout(() => {
+        router.push("/login");
+      }, 1500);
     }
   };
 
