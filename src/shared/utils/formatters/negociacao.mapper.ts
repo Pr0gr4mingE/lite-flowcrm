@@ -5,17 +5,22 @@ import { NegociacaoPf} from "@/shared/types/domain/negociacoes/INegociacao-pf";
 import { NegociacaoPj } from "@/shared/types/domain/negociacoes/INegociacao-pj";
 import { KanbanCardProps } from "@/shared/types/ui/kanban-card.props";
 
-// Função isolada só para decidir a cor do card com base na fase da negociação
-function definirCorPorFase(fase: string): "azul" | "verde" | "cinza" | "vermelho" {
-  // Ajuste os nomes das fases para baterem exatamente com os seus Enums (FaseNegociacaoPf/Pj)
-  const mapaDeCores: Record<string, "azul" | "verde" | "cinza" | "vermelho"> = {
-    PROSPECCAO: "azul",
-    PROPOSTA: "cinza",
-    NEGOCIACAO: "vermelho",
-    FECHADO_GANHO: "verde",
-  };
+type FaseUnificada = NegociacaoPf["fase"] | NegociacaoPj["fase"];
 
-  return mapaDeCores[fase] || "cinza";
+function definirCorPorFase(fase: FaseUnificada): "azul" | "verde" | "cinza" | "vermelho" {
+  // Fases Iniciais (Azul)
+  if (["CAPTURA", "LEAD"].includes(fase)) return "azul";
+  
+  // Fases Intermediárias (Cinza)
+  if (["ENGAJAMENTO", "CONTATO", "PROPOSTA"].includes(fase)) return "cinza";
+  
+  // Fases de Sucesso (Verde)
+  if (["CONVERSAO", "FIDELIZACAO", "FECHADO"].includes(fase)) return "verde";
+  
+  // Fases de Perda (Vermelho)
+  if (["DESISTENCIA", "INDEFERIDO"].includes(fase)) return "vermelho";
+
+  return "cinza";
 }
 
 // O Tradutor principal
