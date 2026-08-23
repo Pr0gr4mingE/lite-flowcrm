@@ -59,6 +59,7 @@ export function useKanban(colunasIniciais: KanbanColumnProps[]) {
 
   return {
     colunas: colunasComAcao,
+    setColunas,
     handleDragEnd,
     modalAberto,
     cardSelecionado,
