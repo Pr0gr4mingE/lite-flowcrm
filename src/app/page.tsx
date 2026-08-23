@@ -48,8 +48,8 @@ export default function LandingPage() {
               </Button>
             </Link>
             
-            {/* 3. Botão de Visitante (Agora apontando para /lf-crm) */}
-            <Link href="/lf-crm" className="w-full sm:w-auto">
+            {/* 3. Botão de Visitante (Agora apontando para /dashboard) */}
+            <Link href="/dashboard" className="w-full sm:w-auto">
               <Button variant="outline" size="lg" className="w-full sm:w-auto text-slate-600">
                 Entrar como visitante
               </Button>
