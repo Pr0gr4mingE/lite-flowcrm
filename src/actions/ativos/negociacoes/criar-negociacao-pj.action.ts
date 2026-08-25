@@ -1,6 +1,6 @@
 "use server";
 
-import { CriarNegociacaoPjDTO } from "@/shared/utils/dto/ativos/negociacao-pj.dto";
+import { NegociacaoPjProps } from "@/shared/utils/props/ativos/negociacao-pj.props";
 import { FaseNegociacaoPj } from "@/shared/utils/types/fase-negociacao-pj.type";
 
 export async function criarNegociacaoPjAction(formData: FormData) {
@@ -9,7 +9,7 @@ export async function criarNegociacaoPjAction(formData: FormData) {
   
   const dataPrevisaoStr = formData.get("dataPrevisaoFechamento") as string;
 
-  const payload: CriarNegociacaoPjDTO = {
+  const payload: NegociacaoPjProps = {
     titulo: formData.get("titulo") as string,
     valor: Number(formData.get("valor")),
     fase: formData.get("fase") as FaseNegociacaoPj,

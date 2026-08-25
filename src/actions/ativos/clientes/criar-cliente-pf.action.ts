@@ -1,12 +1,12 @@
 "use server";
 
-import { CriarClientePfDTO } from "@/shared/utils/dto/ativos/cliente-pf.dto";
+import { ClientePfProps } from "@/shared/utils/props/ativos/cliente-pf.props";
 
 export async function criarClientePfAction(formData: FormData) {
   const isVisitorMode = formData.get("isVisitorMode") === "true";
 
   // 1. Extração e tipagem baseada no DTO
-  const payload: CriarClientePfDTO = {
+  const payload: ClientePfProps = {
     nome: formData.get("nome") as string,
     cpf: formData.get("cpf") as string,
     email: formData.get("email") as string,

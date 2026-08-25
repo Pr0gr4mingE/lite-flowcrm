@@ -1,12 +1,12 @@
 "use server";
 
-import { CriarClientePjDTO } from "@/shared/utils/dto/ativos/cliente-pj.dto";
+import { ClientePjProps } from "@/shared/utils/props/ativos/cliente-pj.props";
 import { SegmentoEmpresa } from "@/shared/utils/types/segmento-empresa.type";
 
 export async function criarClientePjAction(formData: FormData) {
   const isVisitorMode = formData.get("isVisitorMode") === "true";
 
-  const payload: CriarClientePjDTO = {
+  const payload: ClientePjProps = {
     razaoSocial: formData.get("razaoSocial") as string,
     nomeFantasia: formData.get("nomeFantasia") as string,
     cnpj: formData.get("cnpj") as string,
