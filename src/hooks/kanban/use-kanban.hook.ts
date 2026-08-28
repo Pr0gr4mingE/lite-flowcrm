@@ -1,12 +1,10 @@
-// src/hooks/features/use-kanban.hook.ts
+// src/hooks/kanban/use-kanban.hook.ts (ou src/hooks/features/use-kanban.hook.ts dependendo da sua pasta)
 import { useState, useCallback } from "react";
 import { DropResult } from "@hello-pangea/dnd";
 import { KanbanColumnProps } from "@/shared/types/ui/kanban-column.props";
 
 export function useKanban(colunasIniciais: KanbanColumnProps[]) {
   const [colunas, setColunas] = useState<KanbanColumnProps[]>(colunasIniciais);
-  const [modalAberto, setModalAberto] = useState(false);
-  const [cardSelecionado, setCardSelecionado] = useState<string | null>(null);
 
   // Lógica do Drag and Drop (reordenando os arrays localmente)
   const handleDragEnd = useCallback((result: DropResult) => {
@@ -33,36 +31,13 @@ export function useKanban(colunasIniciais: KanbanColumnProps[]) {
       return novasColunas;
     });
 
-    // Aqui será o ponto exato de chamar a Server Action no futuro!
+    // Aqui será o ponto exato de chamar a Server Action no futuro para atualizar o banco!
     console.log(`Action: Mover ${draggableId} para coluna ${destination.droppableId}`);
   }, []);
 
-  // Lógica de UI (Modal)
-  const abrirModalCard = useCallback((id: string) => {
-    setCardSelecionado(id);
-    setModalAberto(true);
-  }, []);
-
-  const fecharModal = useCallback(() => {
-    setModalAberto(false);
-    setCardSelecionado(null); // Limpa a seleção ao fechar
-  }, []);
-
-  // Injetando o evento de clique nos cards antes de mandar pra UI
-  const colunasComAcao = colunas.map(coluna => ({
-    ...coluna,
-    cards: coluna.cards.map(card => ({
-      ...card,
-      aoClicar: abrirModalCard
-    }))
-  }));
-
   return {
-    colunas: colunasComAcao,
+    colunas,
     setColunas,
     handleDragEnd,
-    modalAberto,
-    cardSelecionado,
-    fecharModal
   };
 }
