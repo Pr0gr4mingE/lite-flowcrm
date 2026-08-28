@@ -4,6 +4,7 @@ import { Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { useLayoutMenu } from "@/shared/hooks/layout/use-layout-menu.hook";
+import { GerenciadorDeModais } from "@/components/features/modals/gerenciador-de-modais";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { menuAberto, alternarMenu, fecharMenu } = useLayoutMenu();
@@ -26,6 +27,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           {children}
         </main>
         <Footer />
+        <GerenciadorDeModais />
       </div>
     </div>
   );
