@@ -5,4 +5,5 @@ export interface KanbanBoardProps {
   colunas: KanbanColumnProps[];
   carregando?: boolean;
   onDragEnd: (result: DropResult) => void; // Recebe o evento bruto direto da Feature
+  tipoFunil: "PF" | "PJ"; 
 }
